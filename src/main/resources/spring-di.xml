@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- DI依赖注入的方式：set方法注入 -->
+    <bean id="car" class="Spring.DI.Car">
+        <property name="brand" value="奥迪"></property>
+        <property name="crop" value="一汽"></property>
+        <property name="price" value="300000"></property>
+    </bean>
+
+    <!-- DI依赖注入的方式：构造器方法注入
+        index：指定参数位置
+        type:指定参数类型
+      -->
+    <bean id="car1" class="Spring.DI.Car">
+        <constructor-arg value="宝马" index="0"></constructor-arg>
+        <constructor-arg value="40000" index="2" type="java.lang.Double"></constructor-arg>
+        <constructor-arg value="华晨" index="1"></constructor-arg>
+    </bean>
+
+    <bean id="car2" class="Spring.DI.Car">
+        <constructor-arg value="奔驰" ></constructor-arg>
+        <constructor-arg value="梅赛德斯" ></constructor-arg>
+        <constructor-arg value="20" type="java.lang.Integer"></constructor-arg>
+    </bean>
+</beans>

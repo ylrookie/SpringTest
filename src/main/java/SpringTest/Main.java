@@ -10,7 +10,13 @@ public class Main {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
 
         //2.获取Person对象
-        Person person = (Person) ctx.getBean("person");
+        //方式1
+        // Person person = (Person) ctx.getBean("person");
+        // 方式二
+        //Person person = ctx.getBean(Person.class);
+        //这种要留意，配置表是否有两个相同类的bean；
+        //方式三
+        Person person = ctx.getBean("person1",Person.class);
         //3.调用对应的方法
         person.sayHello();
     }
