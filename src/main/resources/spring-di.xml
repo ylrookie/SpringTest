@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- DI依赖注入的方式：set方法注入 -->
@@ -15,14 +16,38 @@
         type:指定参数类型
       -->
     <bean id="car1" class="Spring.DI.Car">
-        <constructor-arg value="宝马" index="0"></constructor-arg>
-        <constructor-arg value="40000" index="2" type="java.lang.Double"></constructor-arg>
-        <constructor-arg value="华晨" index="1"></constructor-arg>
+        <constructor-arg  value="宝马" index="0"></constructor-arg>
+        <constructor-arg  value="40000" index="2" type="java.lang.Double"></constructor-arg>
+        <constructor-arg  value="华晨" index="1"></constructor-arg>
     </bean>
 
     <bean id="car2" class="Spring.DI.Car">
         <constructor-arg value="奔驰" ></constructor-arg>
         <constructor-arg value="梅赛德斯" ></constructor-arg>
         <constructor-arg value="20" type="java.lang.Integer"></constructor-arg>
+    </bean>
+
+    <!-- 使用P命名空间语法配合bean -->
+    <!-- 底层使用的还是set方法注入，price没有set方法，所有不能用 -->
+    <bean id="car3" class="Spring.DI.Car"
+          p:brand="福特" p:crop="长安" p:price="20000"  >
+    </bean>
+
+    <!-- 字面量
+	 	特殊字符:
+	 		1. 使用实体.  &nbsp;
+	 				&: &amp;
+	 				<: &lt;
+	 				>: &gt;
+	 				": &quot;
+	 				':
+	 		2. <![CDATA[  写任意字符    ]]>
+	  -->
+    <bean id="book" class="Spring.DI.Book">
+        <property name="bookId" value="1001"></property>
+        <!--<property name="bookName" value="&lt;&lt;Java从入门到放弃&gt;&gt;"></property>-->
+        <property name="bookName">
+            <value><![CDATA[@$<>*&^]]></value>
+        </property>
     </bean>
 </beans>
