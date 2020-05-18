@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- bean的继承关系
+        abstract="true",抽象bean,不能被创建对象,class可以省略不配置,那子bean就得配置class
+        继承可以从父bean继承一些配置，但是id abstract autowire 不能继承
+    -->
+    <bean id="address1"  abstract="true" >
+        <property name="city" value="Beijing"></property>
+        <property name="street" value="ChangAnJie"></property>
+    </bean>
+
+    <!-- 通过parent来继承address1,class和city属性继承父bean -->
+    <bean id="address2"  class="Spring.relation.Address" parent="address1">
+        <!--<property name="city" value="Beijing"></property>-->
+        <property name="street" value="WuDaoKou"></property>
+    </bean>
+
+    <!-- bean的依赖关系 -->
+    <bean id="address3" class="Spring.relation.Address" parent="address1" depends-on="address4"></bean>
+
+    <!-- 要是bean address4不存在，address3就不能被创建对象，因为他依赖于address4-->
+    <bean id="address4" class="Spring.relation.Address"></bean>
+
+</beans>
