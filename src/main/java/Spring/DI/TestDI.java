@@ -66,4 +66,10 @@ public class TestDI {
         PersonList list = app.getBean("personList",PersonList.class);
         System.out.println(list);
     }
+
+    @Test
+    public void testMap(){
+        PersonMap personMap = app.getBean("personMap",PersonMap.class);
+        System.out.println(personMap);
+    }
 }
