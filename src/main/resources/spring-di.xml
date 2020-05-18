@@ -50,4 +50,42 @@
             <value><![CDATA[@$<>*&^]]></value>
         </property>
     </bean>
+
+    <!-- 引用其他的bean -->
+    <bean id="person" class="Spring.DI.Person">
+        <property name="id" value="1"></property>
+        <property name="name" value="Tom"></property>
+        <property name="car" ref="car"></property>
+        <!-- 给级联属性赋值 ,修改时原bean的属性值-->
+        <property name="car.speed" value="150"></property>
+    </bean>
+
+    <!-- 内部bean -->
+    <bean id="person1" class="Spring.DI.Person">
+        <property name="id" value="1"></property>
+        <property name="name" value="Tom"></property>
+        <property name="car" >
+            <!-- 内部bean就不需要写id了 -->
+            <bean class="Spring.DI.Car">
+                <property name="brand" value="Mini"></property>
+                <property name="crop" value="宝马"></property>
+                <property name="price" value="4000"></property>
+                <property name="speed" value="120"></property>
+            </bean>
+        </property>
+    </bean>
+
+    <!-- List集合 -->
+    <bean id="personList" class="Spring.DI.PersonList">
+        <property name="name" value="Tom"></property>
+        <property name="cars">
+            <!-- 构建list -->
+            <list>
+                <!-- 可以使用bean配置，也可以用ref引用 -->
+                <ref bean="car"/>
+                <ref bean="car1"/>
+                <ref bean="car2"/>
+            </list>
+        </property>
+    </bean>
 </beans>

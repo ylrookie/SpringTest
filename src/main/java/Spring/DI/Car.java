@@ -13,6 +13,14 @@ public class Car {
         this.price = price;
     }
 
+    public Integer getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(Integer speed) {
+        this.speed = speed;
+    }
+
     public Car() {
     }
 

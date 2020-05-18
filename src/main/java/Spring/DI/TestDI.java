@@ -1,5 +1,6 @@
 package Spring.DI;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -38,5 +39,31 @@ public class TestDI {
         ApplicationContext app = new ClassPathXmlApplicationContext("spring-di.xml");
         Book book = app.getBean("book",Book.class);
         System.out.println(book);
+    }
+
+    @Test
+    public void testRef(){
+        ApplicationContext app = new ClassPathXmlApplicationContext("spring-di.xml");
+        Person person = app.getBean("person",Person.class);
+        System.out.println(person);
+    }
+
+    private ApplicationContext app = null;
+
+    @Before
+    public void init(){
+         app = new ClassPathXmlApplicationContext("spring-di.xml");
+    }
+
+    @Test
+    public void testInnerBean(){
+        Person person = app.getBean("person1",Person.class);
+        System.out.println(person);
+    }
+
+    @Test
+    public void testList(){
+        PersonList list = app.getBean("personList",PersonList.class);
+        System.out.println(list);
     }
 }
