@@ -84,7 +84,7 @@
                 <!-- 可以使用bean配置，也可以用ref引用 -->
                 <ref bean="car"/>
                 <ref bean="car1"/>
-                <ref bean="car2"/>
+                <ref bean="car3"/>
             </list>
         </property>
     </bean>
