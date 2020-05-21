@@ -3,10 +3,9 @@ package Spring.annotation.dao;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class userDaoImpl implements userDao {
-
+public class userDaoMybatisImpl implements userDao {
     @Override
     public void addUser() {
-        System.out.println("userDao JDBC impl..");
+        System.out.println("UserDao mybatis Impl...");
     }
 }

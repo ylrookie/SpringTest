@@ -10,12 +10,16 @@
     <context:component-scan base-package="Spring.annotation" use-default-filters="true">
         <!-- 指定扫描  必须 设置use-default-filters="false"
 
-           排除扫描   use-default-filters="true"   -->
-        <!-- <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/> -->
-        <!-- <context:include-filter type="assignable" expression="com.atguigu.spring.annotation.controller.UserController"/> -->
+           排除扫描   use-default-filters="true"
+            type="annotation"  根据注解类型
+            type="assignable"  根据类名
+            -->
+
+        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>-->
+        <!--<context:include-filter type="assignable" expression="Spring.annotation.controller.userController"/>-->
 
         <!-- <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/> -->
-        <!-- <context:exclude-filter type="assignable" expression="com.atguigu.spring.annotation.controller.UserController"/> -->
+        <!-- <context:exclude-filter type="assignable" expression="Spring.annotation.controller.userController"/> -->
 
     </context:component-scan>
 

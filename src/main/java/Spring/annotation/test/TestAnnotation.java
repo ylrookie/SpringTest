@@ -14,10 +14,12 @@ public class TestAnnotation {
         userController uc = app.getBean("userController",userController.class);
         System.out.println(uc);
 
-        userServiceImpl us = app.getBean("userServiceImpl",userServiceImpl.class);
+        /*userServiceImpl us = app.getBean("userServiceImpl",userServiceImpl.class);
         System.out.println(us);
 
         userDaoImpl ud = app.getBean("userDaoImpl",userDaoImpl.class);
-        System.out.println(ud);
+        System.out.println(ud);*/
+
+        uc.regist();
     }
 }
