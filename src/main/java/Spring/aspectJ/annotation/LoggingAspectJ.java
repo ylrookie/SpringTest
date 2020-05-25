@@ -1,13 +1,11 @@
 package Spring.aspectJ.annotation;
 
-import jdk.nashorn.internal.scripts.JO;
-import org.apache.ibatis.jdbc.Null;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 
 /*
@@ -16,7 +14,17 @@ import java.util.Arrays;
 
 @Component  //标识为一个组件
 @Aspect     //标识为一个切面
+@Order(3)    //优先级，数字越小，优先级越高  默认值2147483647
 public class LoggingAspectJ {
+
+
+    /**
+     * 声明切入点表达式
+     * 在需要写入切入点表达式时，传入 declarePointCut()  即可
+     * 在其他切面也可以用，带上类名即可  LoggingAspectJ.declarePointCut()
+     */
+    @Pointcut("execution(* Spring.aspectJ.annotation.*.*(..))")
+    public void declarePointCut() {}
 
     /**
     * 前置通知：在目标方法(连接点)执行之前执行
@@ -41,7 +49,8 @@ public class LoggingAspectJ {
      *
      * 连接点对象: JoinPoint
      */
-    @After("execution(* Spring.aspectJ.annotation.*.*(..))")
+//    @After("execution(* Spring.aspectJ.annotation.*.*(..))")
+    @After("declarePointCut()")
     public void afterMethod(JoinPoint joinPoint){
         //获取方法的名字
         String methodName = joinPoint.getSignature().getName();
@@ -54,7 +63,8 @@ public class LoggingAspectJ {
      * 必须在注解里加上  returning
      * 获取方法的返回值: 通过returning 来指定一个名字， 必须要与方法的一个形参名一致.
      */
-    @AfterReturning(value = "execution(* Spring.aspectJ.annotation.*.*(..))",returning = "result")
+//    @AfterReturning(value = "execution(* Spring.aspectJ.annotation.*.*(..))",returning = "result")
+    @AfterReturning(value = "declarePointCut()",returning = "result")
     public void afterRuturningMethod(JoinPoint joinPoint,Object result){
         //获取方法的名字
         String methodName = joinPoint.getSignature().getName();
@@ -69,7 +79,7 @@ public class LoggingAspectJ {
      * 可以通过形参中异常的类型 来设置抛出指定异常才会执行异常通知.
      * public void afterThrowingMethod(JoinPoint joinPoint,Exception ex)  所有异常都会执行
      * public void afterThrowingMethod(JoinPoint joinPoint,NullPointerException ex) 只有空指针异常才会执行此方法
-     * public void afterThrowingMethod(JoinPoint joinPoint,ArithmeticException ex) 算数异常执行此方法
+     * public void afterThrowingMethod(JoinPoint joinPoint,ArithmeticException ex)  只有算数异常执行此方法
      */
     @AfterThrowing(value = "execution(* Spring.aspectJ.annotation.*.*(..))",throwing = "ex")
     public void afterThrowingMethod(JoinPoint joinPoint,Exception ex){
